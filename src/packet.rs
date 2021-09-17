@@ -26,6 +26,7 @@ extern "C" {
     fn ffw_packet_get_stream_index(packet: *const c_void) -> c_int;
     fn ffw_packet_set_stream_index(packet: *mut c_void, index: c_int);
     fn ffw_packet_make_writable(packet: *mut c_void) -> c_int;
+    fn ffw_packet_set_size(packet: *mut c_void, size : usize);
 }
 
 /// Packet with mutable data.
@@ -170,6 +171,13 @@ impl PacketMut {
         Packet {
             ptr,
             time_base: self.time_base,
+        }
+    }
+
+    /// Make the packet data size
+    pub fn set_data_size(& mut self, size : usize){
+        unsafe {
+            ffw_packet_set_size(self.ptr, size);
         }
     }
 }

@@ -77,3 +77,7 @@ uint8_t* ffw_packet_get_data(AVPacket* packet) {
 int ffw_packet_make_writable(AVPacket* packet) {
     return av_packet_make_writable(packet);
 }
+
+void ffw_packet_set_size(AVPacket* packet, size_t size) {
+    packet->size = size;
+}
