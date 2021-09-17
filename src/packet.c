@@ -1,4 +1,5 @@
 #include <libavcodec/avcodec.h>
+#include <libavcodec/packet.h>
 
 AVPacket* ffw_packet_alloc() {
     return av_packet_alloc();
@@ -78,6 +79,7 @@ int ffw_packet_make_writable(AVPacket* packet) {
     return av_packet_make_writable(packet);
 }
 
-void ffw_packet_set_size(AVPacket* packet, size_t size) {
-    packet->size = size;
+int ffw_packet_from_data(AVPacket* packet, uint8_t* data, size_t size){
+    int ret = av_packet_from_data(packet, data, size);
+    return ret;
 }
